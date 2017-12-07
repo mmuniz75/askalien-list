@@ -12,9 +12,8 @@ import { ListComponent } from './list/list.component';
 const appRoutes: Routes = [
   { path: 'answer/:id', component: DetailComponent },
   { path: 'answers/:from/:to', component: ListComponent },
-  { path: 'answers', component: ListComponent },
-  { path: '', redirectTo: '/answers', pathMatch: 'full' }
-  
+  { path: 'answers', component: ListComponent }
+    
 ];
 
 @NgModule({
