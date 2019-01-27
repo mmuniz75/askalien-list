@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 import { AnswerDetail } from '../answer.detail';
 import { Service } from '../service';
@@ -19,10 +19,20 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
 
     const id = +this.route.snapshot.paramMap.get('id');
- 
-      this.service.getAnswer(id).subscribe(
-        answer => this.answer = answer
-      )
+    
+    if(environment.production)
+        this.service.configServer().subscribe(
+      _   =>  this.getQuestion(id)
+        )
+    else
+      this.getQuestion(id);
+      
+  }
+
+  getQuestion(id: number):void {
+    this.service.getAnswer(id).subscribe(
+      answer => this.answer = answer
+    )
   }
 
 }
